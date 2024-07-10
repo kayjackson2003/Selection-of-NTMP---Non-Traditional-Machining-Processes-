@@ -1,0 +1,53 @@
+def select_best_ncm_process(mrr, shape_feature, work_material, tolerance_sf, power_req, cost):
+
+ncm_processes = [
+
+{"name": "AJM", "mrr": "High", "shape_feature": "Limited", "work_material": "Various", "tolerance_sf": "Moderate", "power_req": "Moderate", "cost": "Moderate"}, {"name": "USM", "mrr": "Low", "shape_feature": "Intricate", "work_material": "Brittle", "tolerance_sf": "High", "power_req": "Low", "cost": "Low"}, {"name": "CHM", "mrr": "Moderate", "shape_feature": "Complex", "work_material": "Various", "tolerance_sf": "High", "power_req": "Low", "cost": "Low"}, {"name": "EBM", "mrr": "High", "shape_feature": "Limited", "work_material": "Various", "tolerance_sf": "Low", "power_req": "High", "cost": "High"}, {"name": "LBM", "mrr": "Moderate", "shape_feature": "Complex", "work_material": "Various", "tolerance_sf": "Moderate", "power_req": "Moderate", "cost": "High"}, {"name": "ECM", "mrr": "High", "shape_feature": "Intricate", "work_material": "Conductive", "tolerance_sf": "High", "power_req": "Moderate", "cost": "High"}, {"name": "EDM", "mrr": "Moderate", "shape_feature": "Complex", "work_material": "Conductive", "tolerance_sf": "Low", "power_req": "High", "cost": "Moderate"}, {"name": "PAM", "mrr": "High", "shape_feature": "Limited", "work_material": "Conductive", "tolerance_sf": "High", "power_req": "High", "cost": "High"}
+
+]
+
+# Define a scoring function based on input parameters
+
+def score_process(process):
+
+score = 0
+
+if process["mrr"] == mrr:
+
+score += 2
+
+if process["shape_feature"] == shape_feature:
+
+score += 2
+
+if process["work_material"] == work_material:
+
+score += 2
+
+if process["tolerance_sf"] == tolerance_sf:
+
+score += 1
+
+if process["power_req"] == power_req:
+
+score += 1
+
+if process["cost"] == cost:
+
+score += 1
+
+return score
+
+# Find the process with the highest score
+
+best_process = max(ncm_processes, key=score_process)
+
+return best_process["name"]
+
+# Example usage:
+
+mrr = "High" shape_feature = "Limited" work_material = "Various"
+
+tolerance_sf = "Moderate" power_req = "Moderate" cost = "Moderate" best_ncm_process = select_best_ncm_process(mrr, shape_feature, work_material, tolerance_sf, power_req, cost)
+
+print("Best non-traditional machining process:", best_ncm_process)/
